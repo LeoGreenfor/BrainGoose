@@ -19,6 +19,7 @@ public class ShibenicaController : MonoBehaviour
     #region Word
     private string[] ListOfWordsAndTopic = new string[24];
     private string currentWord;
+    private string rightWord;
     private string emptyWord = "";
     private int currentTopic;
     #endregion
@@ -34,6 +35,7 @@ public class ShibenicaController : MonoBehaviour
         currentTopic = Random.Range(0, 23);
         string[] substrings = ListOfWordsAndTopic[currentTopic].Split(" ");
         currentWord = substrings[1];
+        rightWord = currentWord;
         
         for (int i = 0; i < currentWord.Length; i++)
         {
@@ -65,7 +67,7 @@ public class ShibenicaController : MonoBehaviour
 
                     WordText.text = emptyWord;
                 }
-                if (currentWord == emptyWord)
+                if (emptyWord == rightWord)
                 {
                     isWinningGame = true;
                 }
@@ -81,13 +83,13 @@ public class ShibenicaController : MonoBehaviour
 
         if (numberOfMistakes == 4)
         {
-            endGameScreen.enabled = false;
-            endGameScreen.color = new Color(205.0f, 0.0f, 0.0f, 145.0f);
+            endGameScreen.gameObject.SetActive(true);
+            endGameScreen.color = new Color(205.0f, 0.0f, 0.0f, 0.5f);
         }
         if (isWinningGame)
         {
-            endGameScreen.enabled = false;
-            endGameScreen.color = new Color(0.0f, 200.0f, 0.0f, 145.0f);
+            endGameScreen.gameObject.SetActive(true);
+            endGameScreen.color = new Color(0.0f, 200.0f, 0.0f, 0.5f);
         }
     }
 
@@ -130,4 +132,5 @@ public class ShibenicaController : MonoBehaviour
     {
         currentLetter = letter;
     }
+
 }
