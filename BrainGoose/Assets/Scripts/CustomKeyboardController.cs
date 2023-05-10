@@ -8,7 +8,6 @@ public class CustomKeyboardController : MonoBehaviour
 {
     private ShibenicaController shibenicaController;
 
-
     private void Start()
     {
         shibenicaController = GameObject.FindGameObjectWithTag("Player").GetComponent<ShibenicaController>();

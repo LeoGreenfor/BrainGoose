@@ -13,6 +13,8 @@ public class ShibenicaController : MonoBehaviour
     private TMP_Text WordText;
     [SerializeField]
     private Image shibenicaImage;
+    [SerializeField]
+    private Image endGameScreen;
     #endregion
     #region Word
     private string[] ListOfWordsAndTopic = new string[24];
@@ -44,6 +46,7 @@ public class ShibenicaController : MonoBehaviour
 
     void Update()
     {
+        bool isWinningGame = false;
         if (IsLetterOnClick)
         {
             if (currentWord.Contains(currentLetter))
@@ -62,6 +65,10 @@ public class ShibenicaController : MonoBehaviour
 
                     WordText.text = emptyWord;
                 }
+                if (currentWord == emptyWord)
+                {
+                    isWinningGame = true;
+                }
             }
             else
             {
@@ -74,7 +81,13 @@ public class ShibenicaController : MonoBehaviour
 
         if (numberOfMistakes == 4)
         {
-            Debug.Log("You lose!");
+            endGameScreen.enabled = false;
+            endGameScreen.color = new Color(205.0f, 0.0f, 0.0f, 145.0f);
+        }
+        if (isWinningGame)
+        {
+            endGameScreen.enabled = false;
+            endGameScreen.color = new Color(0.0f, 200.0f, 0.0f, 145.0f);
         }
     }
 
