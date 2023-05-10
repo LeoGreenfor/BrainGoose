@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class ShibenicaController : MonoBehaviour
 {
@@ -10,18 +11,25 @@ public class ShibenicaController : MonoBehaviour
     private TMP_Text TopicText;
     [SerializeField]
     private TMP_Text WordText;
+    [SerializeField]
+    private Image shibenicaImage;
     #endregion
     #region Word
-    private string[] ListOfWordsAndTopic = new string[4];
+    private string[] ListOfWordsAndTopic = new string[24];
     private string currentWord;
     private string emptyWord = "";
     private int currentTopic;
+    #endregion
+    #region Logic
+    private bool IsLetterOnClick = false;
+    private char currentLetter;
+    private int numberOfMistakes = 0;
     #endregion
 
     void Start()
     {
         CreateListOfWords();
-        currentTopic = Random.Range(0, 3);
+        currentTopic = Random.Range(0, 23);
         string[] substrings = ListOfWordsAndTopic[currentTopic].Split(" ");
         currentWord = substrings[1];
         
@@ -31,26 +39,82 @@ public class ShibenicaController : MonoBehaviour
         }
 
         TopicText.text = substrings[0];
-        WordText.text = substrings[1];
+        WordText.text = emptyWord;
     }
 
     void Update()
     {
-        
+        if (IsLetterOnClick)
+        {
+            if (currentWord.Contains(currentLetter))
+            {
+                while (currentWord.Contains(currentLetter))
+                {
+                    int index = currentWord.IndexOf(currentLetter);
+                    char[] emptyWordArr = emptyWord.ToCharArray();
+                    char[] currentWordArr = currentWord.ToCharArray();
+
+                    emptyWordArr[index] = currentLetter;
+                    currentWordArr[index] = '_';
+
+                    emptyWord = new string(emptyWordArr);
+                    currentWord = new string(currentWordArr);
+
+                    WordText.text = emptyWord;
+                }
+            }
+            else
+            {
+                numberOfMistakes++;
+                shibenicaImage.GetComponent<ImageInfo>().ChangeImage(numberOfMistakes);
+            }
+            
+            IsLetterOnClick = false;
+        }
+
+        if (numberOfMistakes == 4)
+        {
+            Debug.Log("You lose!");
+        }
     }
 
     private void CreateListOfWords()
     {
-        ListOfWordsAndTopic[0] = "Animal Goose";
-        //ListOfWordsAndTopic[0] = "Goose";
+        ListOfWordsAndTopic[0] = "Животные гусь";
+        ListOfWordsAndTopic[1] = "Животные дельфин";
+        ListOfWordsAndTopic[2] = "Животные жираф";
+        ListOfWordsAndTopic[3] = "Животные креветка";
+        ListOfWordsAndTopic[4] = "Животные осьминог";
+        ListOfWordsAndTopic[5] = "Животные носорог";
 
-        ListOfWordsAndTopic[1] = "Plant Dandelion";
-        //ListOfWordsAndTopic[1] = "Dandelion";
+        ListOfWordsAndTopic[6] = "Растения ромашка";
+        ListOfWordsAndTopic[7] = "Растения тюльпан";
+        ListOfWordsAndTopic[8] = "Растения одуванчик";
+        ListOfWordsAndTopic[9] = "Растения хризантема";
+        ListOfWordsAndTopic[10] = "Растения василёк";
+        ListOfWordsAndTopic[11] = "Растения роза";
 
-        ListOfWordsAndTopic[2] = "Jobs Librarian";
-        //ListOfWordsAndTopic[2] = "Librarian";
+        ListOfWordsAndTopic[12] = "Профессии библиотекарь";
+        ListOfWordsAndTopic[13] = "Профессии програмист";
+        ListOfWordsAndTopic[14] = "Профессии учитель";
+        ListOfWordsAndTopic[15] = "Профессии солдат";
+        ListOfWordsAndTopic[16] = "Профессии водитель";
+        ListOfWordsAndTopic[17] = "Профессии строитель";
 
-        ListOfWordsAndTopic[3] = "Elements Water";
-        //ListOfWordsAndTopic[3] = "Water";
+        ListOfWordsAndTopic[18] = "Элементы вода";
+        ListOfWordsAndTopic[19] = "Элементы огонь";
+        ListOfWordsAndTopic[20] = "Элементы земля";
+        ListOfWordsAndTopic[21] = "Элементы воздух";
+        ListOfWordsAndTopic[22] = "Элементы хаос";
+        ListOfWordsAndTopic[23] = "Элементы порядок";
+    }
+
+    public void SetIsLetterOnClick(bool isClick)
+    {
+        IsLetterOnClick = isClick;
+    }
+    public void SetCurrentLetter(char letter)
+    {
+        currentLetter = letter;
     }
 }
