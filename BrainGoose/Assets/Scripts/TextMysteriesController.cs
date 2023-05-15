@@ -100,7 +100,7 @@ public class TextMysteriesController : MonoBehaviour
         yield return new WaitForSeconds(5.0f);
         Initiate();
     }
-        private void FixedUpdate()
+    private void FixedUpdate()
     {
         Button[] buttons = GetComponentsInChildren<Button>().ToArray();
         // Проходимося по кожній Клавіші 
