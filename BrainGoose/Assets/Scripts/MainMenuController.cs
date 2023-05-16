@@ -8,9 +8,9 @@ using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {    
-    public void BeginGame(int index)
+    public void BeginGame()
     {
-        SceneManager.LoadScene(index);
+        SceneManager.LoadScene(Random.Range(1, 4));
     }
     public void Exit()
     {

@@ -2869,7 +2869,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
+  m_ScaleFactor: 0.5
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
@@ -3895,6 +3895,7 @@ GameObject:
   - component: {fileID: 669841979}
   - component: {fileID: 669841978}
   - component: {fileID: 669841977}
+  - component: {fileID: 669841980}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3968,6 +3969,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &669841980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669841976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b2eede841339e34e8536e1ec600bb01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tracks:
+  - {fileID: 8300000, guid: 6f500fff609b3e846b19a62935be2efb, type: 3}
+  - {fileID: 8300000, guid: 748c5de127eca294a82c03f725a299c9, type: 3}
+  - {fileID: 8300000, guid: ae174371d87fc9540b73673b29e84894, type: 3}
 --- !u!1 &733923116
 GameObject:
   m_ObjectHideFlags: 0
