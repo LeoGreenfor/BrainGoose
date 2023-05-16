@@ -137,7 +137,9 @@ public class PuzzleController : MonoBehaviour
         }
         else
         {
-            swapButton.image.color = Color.white;
+            Color col = Color.white;
+            col.a = 0.5f;
+            swapButton.image.color = col;
             rightButtons--;
         }
         if (button.name.Contains(button.GetComponentInChildren<TMP_Text>().text))
@@ -148,7 +150,9 @@ public class PuzzleController : MonoBehaviour
         }
         else
         {
-            button.image.color = Color.white;
+            Color col = Color.white;
+            col.a = 0.5f;
+            button.image.color = col;
             rightButtons--;
         }
 
