@@ -6,6 +6,8 @@ using System;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine.UI;
+using GameSaver;
+using UnityEngine.SceneManagement;
 
 public class TextMysteriesController : MonoBehaviour
 {
@@ -54,9 +56,15 @@ public class TextMysteriesController : MonoBehaviour
     [SerializeField] private TMP_Text answer2;
     [SerializeField] private TMP_Text answer3;
     [SerializeField] private TMP_Text answer4;
+
     string rightAnswer;
     int winCounter = 0;
     int loseCounter = 0;
+    private int score = 500;
+
+    private PlayerOriginator originator;
+    private PlayerCaretaker caretaker;
+
     void Start()
     {
         Initiate();
@@ -124,6 +132,7 @@ public class TextMysteriesController : MonoBehaviour
                 {
                     button.image.color = Color.red;
                     loseCounter++;
+                    
                     if(loseCounter == 3)
                     {
                         Application.Quit();
@@ -134,5 +143,18 @@ public class TextMysteriesController : MonoBehaviour
             
         }
         
+    }
+    
+    //you need to implement that, when player move to next scene
+    private IEnumerator Nextscene()
+    {
+        originator = new PlayerOriginator(score);
+        caretaker = new PlayerCaretaker(originator);
+        caretaker.UpdateHistory();
+
+        Debug.Log(originator.GetPoints());
+        yield return new WaitForSeconds(2.0f);
+
+        SceneManager.LoadScene(UnityEngine.Random.Range(1, 4));
     }
 }

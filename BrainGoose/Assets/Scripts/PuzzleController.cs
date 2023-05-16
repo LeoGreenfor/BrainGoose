@@ -1,3 +1,4 @@
+using GameSaver;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ public class PuzzleController : MonoBehaviour
     int rightButtons = 0;
     string[][] buttonTextCoor;
     Button[][] buttonsGrid;
+    private PlayerOriginator originator;
+    private PlayerCaretaker caretaker;
     // Start is called before the first frame update
     void Start()
     {

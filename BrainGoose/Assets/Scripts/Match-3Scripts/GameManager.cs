@@ -4,6 +4,9 @@ using UnityEngine.UI;
 using Match3;
 using GameStates;
 using TMPro;
+using System.Collections;
+using UnityEngine.SceneManagement;
+using GameSaver;
 
 /// <summary>
 /// The main control script of the game.
@@ -34,7 +37,9 @@ public class GameManager : MonoBehaviour, IMatch3GameHandler
     private UnitInfo[,] _unitsArray; //Array of links to unit management scripts.
     private Color[] _colors; //Colors for units, assigned by id.
     private Sprite[] _sprites; //Sprites for units, assigned by id.
-    private UnitInfo _selectedUnit; //Selected by player current unit.        
+    private UnitInfo _selectedUnit; //Selected by player current unit.     
+    private PlayerOriginator originator;
+    private PlayerCaretaker caretaker;
 
     //Lists of units that need to be moved in FixedUpdate.
     public List<UnitInfo> UnitsToMove { get; private set; } = new List<UnitInfo>();    
@@ -304,6 +309,18 @@ public class GameManager : MonoBehaviour, IMatch3GameHandler
         }
     }
 
+    private IEnumerator Nextscene()
+    {
+        originator = new PlayerOriginator(500);
+        caretaker = new PlayerCaretaker(originator);
+        caretaker.UpdateHistory();
+
+        Debug.Log(originator.GetPoints());
+        yield return new WaitForSeconds(2.0f);
+
+        SceneManager.LoadScene(Random.Range(1, 4));
+    }
+
     /// <summary>
     /// Reset progress and start a new game.
     /// </summary>
@@ -315,7 +332,8 @@ public class GameManager : MonoBehaviour, IMatch3GameHandler
     private void EndGame()
     {
         GameObject.FindGameObjectWithTag("Finish").SetActive(true);
-        //next Scene
+
+        StartCoroutine(Nextscene());
     }
 }
     

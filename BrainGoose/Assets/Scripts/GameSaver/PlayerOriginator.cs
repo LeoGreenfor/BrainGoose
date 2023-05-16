@@ -8,7 +8,12 @@ namespace GameSaver
 {
     class PlayerOriginator
     {
-        public int points;
+        private int points = 0;
+
+        public PlayerOriginator(int addPoints)
+        {
+            this.points += addPoints;
+        }
 
         public PlayerMemento Save()
         {
@@ -17,6 +22,10 @@ namespace GameSaver
         public void Restore(PlayerMemento memento)
         {
             this.points = memento.GetScore();
+        }
+        public int GetPoints()
+        {
+            return points;
         }
     }
 }

@@ -6,10 +6,15 @@ using System.Threading.Tasks;
 
 namespace GameSaver
 {
-    public class PlayerCaretaker
+    class PlayerCaretaker
     {
         private PlayerOriginator originator;
-        private Stack<PlayerMemento> history;
+        private Stack<PlayerMemento> history = new Stack<PlayerMemento>();
+
+        public PlayerCaretaker(PlayerOriginator playerOriginator)
+        {
+            originator = playerOriginator;
+        }
 
         public void UpdateHistory()
         {

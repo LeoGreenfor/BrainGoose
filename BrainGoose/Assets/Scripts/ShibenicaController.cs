@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using GameSaver;
 
 public class ShibenicaController : MonoBehaviour
 {
@@ -27,6 +29,9 @@ public class ShibenicaController : MonoBehaviour
     private bool IsLetterOnClick = false;
     private char currentLetter;
     private int numberOfMistakes = 0;
+    private int maxPoints = 500;
+    private PlayerOriginator originator;
+    private PlayerCaretaker caretaker;
     #endregion
 
     void Start()
@@ -76,6 +81,7 @@ public class ShibenicaController : MonoBehaviour
             {
                 numberOfMistakes++;
                 shibenicaImage.GetComponent<ImageInfo>().ChangeImage(numberOfMistakes);
+                maxPoints -= 100;
             }
             
             IsLetterOnClick = false;
@@ -85,11 +91,15 @@ public class ShibenicaController : MonoBehaviour
         {
             endGameScreen.gameObject.SetActive(true);
             endGameScreen.color = new Color(205.0f, 0.0f, 0.0f, 0.5f);
+
+            StartCoroutine(Nextscene());
         }
         if (isWinningGame)
         {
             endGameScreen.gameObject.SetActive(true);
             endGameScreen.color = new Color(0.0f, 200.0f, 0.0f, 0.5f);
+
+            StartCoroutine(Nextscene());
         }
     }
 
@@ -131,6 +141,18 @@ public class ShibenicaController : MonoBehaviour
     public void SetCurrentLetter(char letter)
     {
         currentLetter = letter;
+    }
+
+    private IEnumerator Nextscene()
+    {
+        originator = new PlayerOriginator(maxPoints);
+        caretaker = new PlayerCaretaker(originator);
+        caretaker.UpdateHistory();
+
+        Debug.Log(originator.GetPoints());
+        yield return new WaitForSeconds(2.0f);
+
+        SceneManager.LoadScene(Random.Range(1, 4));
     }
 
 }
