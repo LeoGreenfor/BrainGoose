@@ -41,7 +41,6 @@ public class PuzzleController : MonoBehaviour
             for (int j = 0; j < buttonsGrid[i].Length; j++)
             {
                 buttonsGrid[i][j] = buttons[j + i * 4];
-                Debug.Log(buttonsGrid[i][j].name);
             }
         }
         string[] texts = new string[buttons.Length];
@@ -84,6 +83,8 @@ public class PuzzleController : MonoBehaviour
     }
     public void OnCLick(string BTNName)
     {
+
+        
         Button button = GetComponentsInChildren<Button>().Where(b => b.name == BTNName).First();
         Button[] BTNArr = Array.Find(buttonsGrid,b => b.Contains<Button>(button));
         int i = Array.IndexOf(buttonsGrid, BTNArr);
@@ -122,10 +123,6 @@ public class PuzzleController : MonoBehaviour
                 neighbourBTNs[3] = buttonsGrid[i][j - 1];
                 break;
         }
-        foreach (Button item in neighbourBTNs)
-        {
-            Debug.Log(item.name);
-        }
         Button swapButton = Array.Find(neighbourBTNs,
             b => b.GetComponentInChildren<TMP_Text>().text == "  ");
         if (swapButton != null)
@@ -142,10 +139,13 @@ public class PuzzleController : MonoBehaviour
         }
         else
         {
+            if (swapButton.image.color == Color.green)
+            {
+                rightButtons--;
+            }
             Color col = Color.white;
             col.a = 0.5f;
             swapButton.image.color = col;
-            rightButtons--;
         }
         if (button.name.Contains(button.GetComponentInChildren<TMP_Text>().text))
         {
@@ -155,13 +155,15 @@ public class PuzzleController : MonoBehaviour
         }
         else
         {
+            if (button.image.color == Color.green)
+            {
+                rightButtons--;
+            }
             Color col = Color.white;
             col.a = 0.5f;
             button.image.color = col;
-            rightButtons--;
         }
-
-        if(rightButtons == 15)
+        if (rightButtons == 15)
         {
             StartCoroutine(Nextscene());
         }
