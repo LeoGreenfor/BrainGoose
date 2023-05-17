@@ -67,10 +67,11 @@ public class TextMysteriesController : MonoBehaviour
 
     void Start()
     {
-        Initiate();
+        InitiateGame();
+        InitiateButtons();
     }
 
-    private void Initiate()
+    private void InitiateGame()
     {
         int index = UnityEngine.Random.Range(0, mysteries.Length);
         mysteryText.text = mysteries[index];
@@ -100,15 +101,16 @@ public class TextMysteriesController : MonoBehaviour
         Button[] buttons = GetComponentsInChildren<Button>().ToArray();
         foreach (var item in buttons)
         {
+            item.interactable = true;
             item.image.color = Color.white;
         }
     }
     private IEnumerator MyCoroutine()
     {
         yield return new WaitForSeconds(5.0f);
-        Initiate();
+        InitiateGame();
     }
-    private void FixedUpdate()
+    private void InitiateButtons()
     {
         Button[] buttons = GetComponentsInChildren<Button>().ToArray();
         // Проходимося по кожній Клавіші 
@@ -123,20 +125,37 @@ public class TextMysteriesController : MonoBehaviour
                     winCounter++;
                     if (winCounter == 3)
                     {
-                        Application.Quit();
+                        StartCoroutine(Nextscene());
                     }
+                    foreach (var item in buttons)
+                    {
+                        item.interactable = false;
+                    }   
                     StartCoroutine(MyCoroutine());
                     
                 }
                 else
                 {
                     button.image.color = Color.red;
-                    loseCounter++;
-                    
-                    if(loseCounter == 3)
+                    if (loseCounter < 2)
                     {
-                        Application.Quit();
-                        
+                        score -= 50 + loseCounter * 25;
+                    }
+                    else
+                    {
+                        score -= 75 + loseCounter * 25;
+                    }
+                    loseCounter++;
+                    button.interactable = false;
+                    if (loseCounter == 3)
+                    {
+                        InitiateGame();
+                        loseCounter = 0;
+                    }
+                    if(score <= 0)
+                    {
+                        score = 0;
+                        StartCoroutine(Nextscene());
                     }
                 }
             });
