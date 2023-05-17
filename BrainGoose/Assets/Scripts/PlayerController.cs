@@ -1,0 +1,21 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerController : MonoBehaviour
+{
+    public void NewGame()
+    {
+
+    }
+
+    public void LoadGame()
+    {
+
+    }
+
+    public void ExitGame()
+    {
+
+    }
+}
