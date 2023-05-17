@@ -211,7 +211,7 @@ namespace Match3 {
 
             foreach (var match in matches)
             {
-                earnedScore += (match.Count - 1) * 10;
+                earnedScore += match.Count * 15;
 
                 foreach (Position pos in match)
                 {

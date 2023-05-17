@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour, IMatch3GameHandler
     private UnitInfo _selectedUnit; //Selected by player current unit.     
     private PlayerOriginator originator;
     private PlayerCaretaker caretaker;
+    private GameObject finishObject;
 
     //Lists of units that need to be moved in FixedUpdate.
     public List<UnitInfo> UnitsToMove { get; private set; } = new List<UnitInfo>();    
@@ -92,6 +93,8 @@ public class GameManager : MonoBehaviour, IMatch3GameHandler
         if (_sprites == null)
             _sprites = UnitSprites;
 
+        finishObject = GameObject.FindGameObjectWithTag("Finish");
+        finishObject.SetActive(false);
         InitNewGame();
     }
 
@@ -311,11 +314,8 @@ public class GameManager : MonoBehaviour, IMatch3GameHandler
 
     private IEnumerator Nextscene()
     {
-        originator = new PlayerOriginator(500);
-        caretaker = new PlayerCaretaker(originator);
-        caretaker.UpdateHistory();
+        SaveManager.AddScore(500);
 
-        Debug.Log(originator.GetPoints());
         yield return new WaitForSeconds(2.0f);
 
         SceneManager.LoadScene(Random.Range(1, 4));
@@ -331,7 +331,7 @@ public class GameManager : MonoBehaviour, IMatch3GameHandler
 
     private void EndGame()
     {
-        GameObject.FindGameObjectWithTag("Finish").SetActive(true);
+        finishObject.SetActive(true);
 
         StartCoroutine(Nextscene());
     }

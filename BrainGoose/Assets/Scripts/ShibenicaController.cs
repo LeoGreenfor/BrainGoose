@@ -30,8 +30,6 @@ public class ShibenicaController : MonoBehaviour
     private char currentLetter;
     private int numberOfMistakes = 0;
     private int maxPoints = 500;
-    private PlayerOriginator originator;
-    private PlayerCaretaker caretaker;
     #endregion
 
     void Start()
@@ -145,11 +143,9 @@ public class ShibenicaController : MonoBehaviour
 
     private IEnumerator Nextscene()
     {
-        originator = new PlayerOriginator(maxPoints);
-        caretaker = new PlayerCaretaker(originator);
-        caretaker.UpdateHistory();
+        SaveManager.AddScore(maxPoints);
 
-        Debug.Log(originator.GetPoints());
+        //Debug.Log(SaveManager.GetScore());
         yield return new WaitForSeconds(2.0f);
 
         SceneManager.LoadScene(Random.Range(1, 4));

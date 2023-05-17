@@ -8,11 +8,11 @@ namespace GameSaver
 {
     class PlayerMemento
     {
-        private int GlobalScore;
+        private int GlobalScore = 0;
 
         public PlayerMemento(int globalScore)
         {
-            this.GlobalScore = globalScore;
+            this.GlobalScore += globalScore;
         }
 
         public int GetScore()
