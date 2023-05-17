@@ -33,6 +33,7 @@ namespace GameSaver
         public static void AddScore(int score)
         {
             GlobalScore += score;
+            CheckScore();
         }
         public static int GetScore()
         {

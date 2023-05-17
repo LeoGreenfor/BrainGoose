@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using Unity.Mathematics;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -23,12 +22,6 @@ public class PuzzleController : MonoBehaviour
     void Start()
     {
         Initiate();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void Initiate()
