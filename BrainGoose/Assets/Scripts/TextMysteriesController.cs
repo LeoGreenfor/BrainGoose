@@ -56,6 +56,7 @@ public class TextMysteriesController : MonoBehaviour
     [SerializeField] private TMP_Text answer2;
     [SerializeField] private TMP_Text answer3;
     [SerializeField] private TMP_Text answer4;
+    [SerializeField] private Image endGameScreen;
 
     string rightAnswer;
     int winCounter = 0;
@@ -163,15 +164,13 @@ public class TextMysteriesController : MonoBehaviour
         }
         
     }
-    
-    //you need to implement that, when player move to next scene
+
     private IEnumerator Nextscene()
     {
-        originator = new PlayerOriginator(score);
-        caretaker = new PlayerCaretaker(originator);
-        caretaker.UpdateHistory();
+        SaveManager.AddScore(score);
+        endGameScreen.GetComponentInChildren<TMP_Text>().text += SaveManager.GetScore().ToString();
+        endGameScreen.gameObject.SetActive(true);
 
-        Debug.Log(originator.GetPoints());
         yield return new WaitForSeconds(2.0f);
 
         SceneManager.LoadScene(UnityEngine.Random.Range(1, 4));

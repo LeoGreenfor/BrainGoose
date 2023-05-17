@@ -87,16 +87,12 @@ public class ShibenicaController : MonoBehaviour
 
         if (numberOfMistakes == 4)
         {
-            endGameScreen.gameObject.SetActive(true);
             endGameScreen.color = new Color(205.0f, 0.0f, 0.0f, 0.5f);
-
             StartCoroutine(Nextscene());
         }
         if (isWinningGame)
         {
-            endGameScreen.gameObject.SetActive(true);
             endGameScreen.color = new Color(0.0f, 200.0f, 0.0f, 0.5f);
-
             StartCoroutine(Nextscene());
         }
     }
@@ -144,8 +140,9 @@ public class ShibenicaController : MonoBehaviour
     private IEnumerator Nextscene()
     {
         SaveManager.AddScore(maxPoints);
+        endGameScreen.GetComponentInChildren<TMP_Text>().text += SaveManager.GetScore().ToString();
+        endGameScreen.gameObject.SetActive(true);
 
-        //Debug.Log(SaveManager.GetScore());
         yield return new WaitForSeconds(2.0f);
 
         SceneManager.LoadScene(Random.Range(1, 4));

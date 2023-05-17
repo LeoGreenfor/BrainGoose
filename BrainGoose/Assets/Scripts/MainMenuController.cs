@@ -17,4 +17,9 @@ public class MainMenuController : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void GoByUrl(string url)
+    {
+        Application.OpenURL(url);
+    }
 }

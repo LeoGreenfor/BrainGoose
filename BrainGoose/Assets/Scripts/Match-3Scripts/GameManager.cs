@@ -38,8 +38,6 @@ public class GameManager : MonoBehaviour, IMatch3GameHandler
     private Color[] _colors; //Colors for units, assigned by id.
     private Sprite[] _sprites; //Sprites for units, assigned by id.
     private UnitInfo _selectedUnit; //Selected by player current unit.     
-    private PlayerOriginator originator;
-    private PlayerCaretaker caretaker;
     private GameObject finishObject;
 
     //Lists of units that need to be moved in FixedUpdate.
@@ -86,16 +84,15 @@ public class GameManager : MonoBehaviour, IMatch3GameHandler
     {
         //Shift the playing field to the center of the screen.
         MapTransform.localPosition = new Vector3(Columns * -1 * UnitSize / 2f + 45.0f, Rows * -1 * UnitSize / 2f, 0f);
-        //MapTransform.localPosition = new Vector3(50.0f, 225.0f, 0f);
-
+        
         if (_colors == null)
             SetupColors();
         if (_sprites == null)
             _sprites = UnitSprites;
 
+        InitNewGame();
         finishObject = GameObject.FindGameObjectWithTag("Finish");
         finishObject.SetActive(false);
-        InitNewGame();
     }
 
     /// <summary>
@@ -216,7 +213,8 @@ public class GameManager : MonoBehaviour, IMatch3GameHandler
     /// Performing all unit movements, according to the current game state and formed lists of units that need to be moved (UnitsToMove, UnitsToDieAndReborn).
     /// </summary>
     private void FixedUpdate()
-    {   
+    {
+        Debug.Log($"_state: {_state}, this: {this}");
         _state.MoveUnits(this);        
     }
 
@@ -315,10 +313,12 @@ public class GameManager : MonoBehaviour, IMatch3GameHandler
     private IEnumerator Nextscene()
     {
         SaveManager.AddScore(500);
+        finishObject.GetComponentInChildren<TMP_Text>().text += SaveManager.GetScore().ToString();
+        finishObject.SetActive(true);
 
         yield return new WaitForSeconds(2.0f);
 
-        SceneManager.LoadScene(Random.Range(1, 4));
+        SceneManager.LoadScene(UnityEngine.Random.Range(1, 4));
     }
 
     /// <summary>
@@ -331,8 +331,6 @@ public class GameManager : MonoBehaviour, IMatch3GameHandler
 
     private void EndGame()
     {
-        finishObject.SetActive(true);
-
         StartCoroutine(Nextscene());
     }
 }

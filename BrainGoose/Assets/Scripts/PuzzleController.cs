@@ -8,6 +8,7 @@ using Unity.Mathematics;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PuzzleController : MonoBehaviour
@@ -15,8 +16,9 @@ public class PuzzleController : MonoBehaviour
     int rightButtons = 0;
     string[][] buttonTextCoor;
     Button[][] buttonsGrid;
-    private PlayerOriginator originator;
-    private PlayerCaretaker caretaker;
+    [SerializeField]
+    private Image endGameScreen;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -161,7 +163,19 @@ public class PuzzleController : MonoBehaviour
 
         if(rightButtons == 15)
         {
-            Application.Quit();
+            StartCoroutine(Nextscene());
         }
+    }
+
+
+    private IEnumerator Nextscene()
+    {
+        SaveManager.AddScore(500);
+        endGameScreen.GetComponentInChildren<TMP_Text>().text += SaveManager.GetScore().ToString();
+        endGameScreen.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(2.0f);
+
+        SceneManager.LoadScene(UnityEngine.Random.Range(1, 4));
     }
 }
