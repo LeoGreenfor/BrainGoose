@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour, IMatch3GameHandler
     private Color[] _colors; //Colors for units, assigned by id.
     private Sprite[] _sprites; //Sprites for units, assigned by id.
     private UnitInfo _selectedUnit; //Selected by player current unit.     
+    [SerializeField]
     private GameObject finishObject;
 
     //Lists of units that need to be moved in FixedUpdate.
@@ -90,9 +91,10 @@ public class GameManager : MonoBehaviour, IMatch3GameHandler
         if (_sprites == null)
             _sprites = UnitSprites;
 
+        //Debug.Log($"Before init game, {MapTransform.localPosition}");
         InitNewGame();
-        finishObject = GameObject.FindGameObjectWithTag("Finish");
-        finishObject.SetActive(false);
+
+        Debug.Log($"After init game");
     }
 
     /// <summary>
@@ -112,7 +114,6 @@ public class GameManager : MonoBehaviour, IMatch3GameHandler
     private void InitNewGame()
     {        
         _game?.Dispose();
-        //_game = new Match3Game(Rows, Columns, ColorsCount, this);
         _game = new Match3Game(Rows, Columns, UnitSprites.Length, this);
         SetGameState(Match3GameStates.Wait);        
         ScoreText.text = "0";
@@ -153,7 +154,6 @@ public class GameManager : MonoBehaviour, IMatch3GameHandler
                         _unitsArray[i, j].InitUnit(new Position(i, j), UnitSize);
                     }
 
-                    //_unitsArray[i, j].UpdateUnitIdAndColor(id, _colors[id]);
                     _unitsArray[i, j].UpdateUnitIdAndSprite(id, _sprites[id]);
                 }
             }
@@ -214,7 +214,6 @@ public class GameManager : MonoBehaviour, IMatch3GameHandler
     /// </summary>
     private void FixedUpdate()
     {
-        Debug.Log($"_state: {_state}, this: {this}");
         _state.MoveUnits(this);        
     }
 
@@ -306,19 +305,23 @@ public class GameManager : MonoBehaviour, IMatch3GameHandler
 
         if (currentScore >= 500)
         {
-            EndGame();
+            Debug.Log("win!");
+            _game.SetScore();
+            Debug.Log(_game.GetScore());
+            StartCoroutine(Nextscene());
         }
     }
 
     private IEnumerator Nextscene()
     {
         SaveManager.AddScore(500);
+        SaveManager.SaveData();
         finishObject.GetComponentInChildren<TMP_Text>().text += SaveManager.GetScore().ToString();
         finishObject.SetActive(true);
 
         yield return new WaitForSeconds(2.0f);
 
-        SceneManager.LoadScene(UnityEngine.Random.Range(1, 4));
+        SceneManager.LoadScene(UnityEngine.Random.Range(2, 4));
     }
 
     /// <summary>
@@ -327,11 +330,6 @@ public class GameManager : MonoBehaviour, IMatch3GameHandler
     public void ResetGame()
     {
         InitNewGame();
-    }
-
-    private void EndGame()
-    {
-        StartCoroutine(Nextscene());
     }
 }
     

@@ -5,13 +5,26 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 
 public class MainMenuController : MonoBehaviour
-{    
+{
+    [SerializeField]
+    private TMP_Text score;
+
+    private void Start()
+    {
+        SaveManager.LogIn();
+        if (score != null)
+        {
+            score.text = "Очки: " + SaveManager.GetScore().ToString();
+        }
+    }
+
     public void BeginGame()
     {
-        SceneManager.LoadScene(Random.Range(1, 4));
+        SceneManager.LoadScene(1);
     }
     public void Exit()
     {

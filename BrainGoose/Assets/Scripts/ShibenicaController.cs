@@ -87,6 +87,7 @@ public class ShibenicaController : MonoBehaviour
 
         if (numberOfMistakes == 4)
         {
+            numberOfMistakes = 0;
             endGameScreen.color = new Color(205.0f, 0.0f, 0.0f, 0.5f);
             StartCoroutine(Nextscene());
         }
@@ -140,12 +141,13 @@ public class ShibenicaController : MonoBehaviour
     private IEnumerator Nextscene()
     {
         SaveManager.AddScore(maxPoints);
+        SaveManager.SaveData();
         endGameScreen.GetComponentInChildren<TMP_Text>().text += SaveManager.GetScore().ToString();
         endGameScreen.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(2.0f);
 
-        SceneManager.LoadScene(Random.Range(1, 4));
+        SceneManager.LoadScene(Random.Range(2, 4));
     }
 
 }

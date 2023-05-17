@@ -13,6 +13,15 @@ namespace Match3 {
         readonly int YMax;
         readonly int KindsCount;
         private int _score;
+        public void SetScore()
+        {
+            _score = 0;
+        }
+        public int GetScore()
+        {
+            return _score;
+        }
+
         public event Action<int[,]> OnUpdateMap;
         public event Action<int, int> OnUpdateScore;
 
