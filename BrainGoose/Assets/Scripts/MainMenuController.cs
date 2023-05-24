@@ -21,7 +21,6 @@ public class MainMenuController : MonoBehaviour
         {
             score.text = "Очки: " + SaveManager.GetScore().ToString();
         }
-        SaveManager.CheckScore();
     }
 
     public void BeginGame()
@@ -37,14 +36,8 @@ public class MainMenuController : MonoBehaviour
     {
         Application.OpenURL(url);
     }
-
     public void NextScene()
     {
         SceneManager.LoadScene(Random.Range(2, 4));
-    }
-
-    public void Loadscene(int index)
-    {
-        SceneManager.LoadScene(index);
     }
 }

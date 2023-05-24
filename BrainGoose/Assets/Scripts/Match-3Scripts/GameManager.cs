@@ -115,7 +115,6 @@ public class GameManager : MonoBehaviour, IMatch3GameHandler
         SetGameState(Match3GameStates.Wait);        
         ScoreText.text = "0";
         EarnedScoreText.UpdateText("", withMoving: false);
-        finishObject.SetActive(false);
     }
 
     /// <summary>
@@ -301,19 +300,25 @@ public class GameManager : MonoBehaviour, IMatch3GameHandler
         ScoreText.text = currentScore.ToString();
         EarnedScoreText.UpdateText("+" + earnedScore);
 
-        SaveManager.AddScore(earnedScore);
-        SaveManager.SaveData();
-        
+        if (currentScore >= 500)
+        {
+            Debug.Log("win!");
+            _game.SetScore();
+            Debug.Log(_game.GetScore());
+            StartCoroutine(Nextscene());
+        }
     }
 
-    private IEnumerator Nextscene(int score)
+    private IEnumerator Nextscene()
     {
-        SaveManager.AddScore(score);
+        SaveManager.AddScore(500);
         SaveManager.SaveData();
         finishObject.GetComponentInChildren<TMP_Text>().text += SaveManager.GetScore().ToString();
         finishObject.SetActive(true);
 
         yield return new WaitForSeconds(2.0f);
+
+        SceneManager.LoadScene(UnityEngine.Random.Range(2, 4));
     }
 
     /// <summary>
