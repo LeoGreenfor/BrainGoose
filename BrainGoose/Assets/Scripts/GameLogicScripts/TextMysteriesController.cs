@@ -102,8 +102,15 @@ public class TextMysteriesController : MonoBehaviour
         Button[] buttons = GetComponentsInChildren<Button>().ToArray();
         foreach (var item in buttons)
         {
-            item.interactable = true;
-            item.image.color = Color.white;
+            if (item.name == "NextLevelButton")
+            {
+
+            }
+            else
+            {
+                item.interactable = true;
+                item.image.color = Color.white;
+            }
         }
     }
     private IEnumerator MyCoroutine()
