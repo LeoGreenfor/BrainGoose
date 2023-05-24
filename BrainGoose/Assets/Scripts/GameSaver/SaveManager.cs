@@ -31,7 +31,8 @@ namespace GameSaver
         {
             if (GlobalScore >= 4500)
             {
-                SceneManager.LoadScene(5);
+                SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+                SceneManager.LoadScene(2, LoadSceneMode.Single);
             }
         }
 

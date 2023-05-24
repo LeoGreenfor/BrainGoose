@@ -17,6 +17,8 @@ public class ShibenicaController : MonoBehaviour
     private Image shibenicaImage;
     [SerializeField]
     private Image endGameScreen;
+    [SerializeField]
+    private TMP_Text qText;
     #endregion
     #region Word
     private string[] ListOfWordsAndTopic = new string[24];
@@ -36,9 +38,10 @@ public class ShibenicaController : MonoBehaviour
     {
         CreateListOfWords();
         currentTopic = Random.Range(0, 23);
-        string[] substrings = ListOfWordsAndTopic[currentTopic].Split(" ");
+        string[] substrings = ListOfWordsAndTopic[currentTopic].Split("_");
         currentWord = substrings[1];
         rightWord = currentWord;
+        qText.text = substrings[2];
         
         for (int i = 0; i < currentWord.Length; i++)
         {
@@ -100,33 +103,33 @@ public class ShibenicaController : MonoBehaviour
 
     private void CreateListOfWords()
     {
-        ListOfWordsAndTopic[0] = "Животные гусь";
-        ListOfWordsAndTopic[1] = "Животные дельфин";
-        ListOfWordsAndTopic[2] = "Животные жираф";
-        ListOfWordsAndTopic[3] = "Животные креветка";
-        ListOfWordsAndTopic[4] = "Животные осьминог";
-        ListOfWordsAndTopic[5] = "Животные носорог";
+        ListOfWordsAndTopic[0] = "Животные_гусь_В воде плавает, по земле ходит.";
+        ListOfWordsAndTopic[1] = "Животные_дельфин_Играется в волнах, умело ловит рыбу.";
+        ListOfWordsAndTopic[2] = "Животные_жираф_Длинная шея, высокая статура.";
+        ListOfWordsAndTopic[3] = "Животные_креветка_В море крошечная, но очень вкусная.";
+        ListOfWordsAndTopic[4] = "Животные_осьминог_Много рук, скрытая хитрость.";
+        ListOfWordsAndTopic[5] = "Животные_носорог_Рогатый гигант, наделенный силой.";
 
-        ListOfWordsAndTopic[6] = "Растения ромашка";
-        ListOfWordsAndTopic[7] = "Растения тюльпан";
-        ListOfWordsAndTopic[8] = "Растения одуванчик";
-        ListOfWordsAndTopic[9] = "Растения хризантема";
-        ListOfWordsAndTopic[10] = "Растения василёк";
-        ListOfWordsAndTopic[11] = "Растения роза";
+        ListOfWordsAndTopic[6] = "Растения_ромашка_В лугах белеет, лепестки считает.";
+        ListOfWordsAndTopic[7] = "Растения_тюльпан_Весной встает, красотой сияет.";
+        ListOfWordsAndTopic[8] = "Растения_одуванчик_Ветром разносится, детьми собирается.";
+        ListOfWordsAndTopic[9] = "Растения_хризантема_В осенних садах, цветет во всей красе.";
+        ListOfWordsAndTopic[10] = "Растения_василёк_В полевых просторах, голубеет в траве.";
+        ListOfWordsAndTopic[11] = "Растения_роза_Королева сада, шипы свои имеет.";
 
-        ListOfWordsAndTopic[12] = "Профессии библиотекарь";
-        ListOfWordsAndTopic[13] = "Профессии програмист";
-        ListOfWordsAndTopic[14] = "Профессии учитель";
-        ListOfWordsAndTopic[15] = "Профессии солдат";
-        ListOfWordsAndTopic[16] = "Профессии водитель";
-        ListOfWordsAndTopic[17] = "Профессии строитель";
+        ListOfWordsAndTopic[12] = "Профессии_библиотекарь_Страницы сторожит и знанием вдохновляет.";
+        ListOfWordsAndTopic[13] = "Профессии_програмист_Виртуальные миры творит виртуозным кодом. ";
+        ListOfWordsAndTopic[14] = "Профессии_учитель_Знания дарит и умом наполняет.";
+        ListOfWordsAndTopic[15] = "Профессии_солдат_Защищает родину и святую землю.";
+        ListOfWordsAndTopic[16] = "Профессии_водитель_На дорогах и трассах уверенно ведет.";
+        ListOfWordsAndTopic[17] = "Профессии_строитель_Здания воздвигает, мир преображает.";
 
-        ListOfWordsAndTopic[18] = "Элементы вода";
-        ListOfWordsAndTopic[19] = "Элементы огонь";
-        ListOfWordsAndTopic[20] = "Элементы земля";
-        ListOfWordsAndTopic[21] = "Элементы воздух";
-        ListOfWordsAndTopic[22] = "Элементы хаос";
-        ListOfWordsAndTopic[23] = "Элементы порядок";
+        ListOfWordsAndTopic[18] = "Элементы_вода_Жизнь без нее безлика, реки и озера полны ею.";
+        ListOfWordsAndTopic[19] = "Элементы_огонь_Без него жизнь немыслима, искрится и блещет.";
+        ListOfWordsAndTopic[20] = "Элементы_земля_Где растут цветы и травы, в нее корни погружены.";
+        ListOfWordsAndTopic[21] = "Элементы_воздух_Невидим, но всюду присутен, взмахнет крылами и понесется ввысь.";
+        ListOfWordsAndTopic[22] = "Элементы_хаос_Безразмерен и неуловим, хаосом мир наполняет.";
+        ListOfWordsAndTopic[23] = "Элементы_порядок_Все по своим местам расставляет.";
     }
 
     public void SetIsLetterOnClick(bool isClick)
@@ -147,7 +150,7 @@ public class ShibenicaController : MonoBehaviour
 
         yield return new WaitForSeconds(2.0f);
 
-        SceneManager.LoadScene(Random.Range(2, 4));
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
 }
