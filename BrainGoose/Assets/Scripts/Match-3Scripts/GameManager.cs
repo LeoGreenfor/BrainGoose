@@ -91,10 +91,7 @@ public class GameManager : MonoBehaviour, IMatch3GameHandler
         if (_sprites == null)
             _sprites = UnitSprites;
 
-        //Debug.Log($"Before init game, {MapTransform.localPosition}");
         InitNewGame();
-
-        Debug.Log($"After init game");
     }
 
     /// <summary>

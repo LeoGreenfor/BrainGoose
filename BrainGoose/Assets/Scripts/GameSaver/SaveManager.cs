@@ -13,26 +13,15 @@ namespace GameSaver
     static class SaveManager
     {
         public static int GlobalScore { get; private set; }
-        public static bool isHaveAccount = false;
-
-        public static void LogIn()
-        {
-            if (isHaveAccount)
-            {
-                Debug.Log("you have acc!");
-                LoadPlayerScore();
-            }
-            else
-            {
-                Debug.Log("you haven`t acc!");
-                isHaveAccount = true;
-                GlobalScore = 0;
-            }
-        }
-        
+                
         public static void AddScore(int score)
         {
             GlobalScore += score;
+            CheckScore();
+        }
+        public static void SetScore(int score)
+        {
+            GlobalScore = score;
         }
         public static int GetScore()
         {
@@ -49,9 +38,7 @@ namespace GameSaver
         public static void SaveData()
         {
             BinaryFormatter formatter = new BinaryFormatter();
-
             string path = Application.persistentDataPath + "/playerData.info";
-
             FileStream fileStream = new FileStream(path, FileMode.Create);
 
             formatter.Serialize(fileStream, GlobalScore);
@@ -66,7 +53,7 @@ namespace GameSaver
                 BinaryFormatter formatter = new BinaryFormatter();
                 FileStream fileStream = new FileStream(path, FileMode.Open);
 
-                int loadedScore = int.Parse((string)formatter.Deserialize(fileStream));
+                int loadedScore = (int)formatter.Deserialize(fileStream);
                 fileStream.Close();
 
                 GlobalScore = loadedScore;

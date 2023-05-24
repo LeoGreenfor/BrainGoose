@@ -52,7 +52,12 @@
         "m_UseRegularExpressions": false,
         "m_MatchCase": false
     },
-    "m_SymbolPaths": [],
+    "m_SymbolPaths": [
+        {
+            "Name": "E:\\Unity\\2021.3.22f1\\Editor\\Data\\PlaybackEngines\\AndroidPlayer\\Variations\\mono\\Development\\Symbols\\armeabi-v7a",
+            "Enabled": false
+        }
+    ],
     "m_CaptureVideoSettings": {
         "TimeLimitEnabled": false,
         "TimeLimit": 180,
