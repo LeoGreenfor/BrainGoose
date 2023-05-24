@@ -40,7 +40,7 @@ public class MainMenuController : MonoBehaviour
 
     public void NextScene()
     {
-        SceneManager.LoadScene(Random.Range(2, 5));
+        SceneManager.LoadScene(Random.Range(3, 6));
     }
 
     public void Loadscene(int index)

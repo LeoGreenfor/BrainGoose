@@ -26,7 +26,8 @@ public class PuzzleController : MonoBehaviour
 
     public void Initiate()
     {
-        Button[] buttons = GetComponentsInChildren<Button>().ToArray();
+        Button[] buttons = GetComponentsInChildren<Button>()
+            .Where( b => b.GetComponentInChildren<TMP_Text>() != null).ToArray();
         buttonsGrid = new Button[4][];
         for (int i = 0; i < buttonsGrid.Length; i++)
         {
