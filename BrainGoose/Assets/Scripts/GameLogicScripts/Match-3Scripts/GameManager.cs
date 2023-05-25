@@ -301,8 +301,13 @@ public class GameManager : MonoBehaviour, IMatch3GameHandler
         ScoreText.text = currentScore.ToString();
         EarnedScoreText.UpdateText("+" + earnedScore);
 
-        SaveManager.AddScore(earnedScore);
-        SaveManager.SaveData();
+        if (currentScore >= 500)
+        {
+            StartCoroutine(Nextscene(currentScore));
+        }
+
+        //SaveManager.AddScore(earnedScore);
+        //SaveManager.SaveData();
         
     }
 
@@ -314,6 +319,9 @@ public class GameManager : MonoBehaviour, IMatch3GameHandler
         finishObject.SetActive(true);
 
         yield return new WaitForSeconds(2.0f);
+        
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(Random.Range(2, 5));
     }
 
     /// <summary>

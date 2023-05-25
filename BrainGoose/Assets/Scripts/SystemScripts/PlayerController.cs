@@ -21,4 +21,9 @@ public class PlayerController : MonoBehaviour
     {
         qObject.SetActive(false);
     }
+
+    public void GoByUrl(string url)
+    {
+        Application.OpenURL(url);
+    }
 }

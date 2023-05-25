@@ -13,8 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: InShade
-  productName: "\u0413\u0443\u0441\u0438-\u043B\u0435\u0431\u0435\u0434\u0438: \u0422\u0440\u0438
-    \u0432 \u0440\u044F\u0434"
+  productName: "\u0413\u0443\u0441\u0438-\u043B\u0435\u0431\u0435\u0434\u0438"
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -136,7 +135,9 @@ PlayerSettings:
     16:9: 1
     Others: 1
   bundleVersion: 2.2
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: -658771893179834151, guid: b63610c05003c804ba1c5c1cb0cb1f95, type: 2}
+  - {fileID: 11400000, guid: 46f2e790fd557b544a72a7708a784e4d, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -145,8 +146,8 @@ PlayerSettings:
   vrSettings:
     enable360StereoCapture: 0
   isWsaHolographicRemotingEnabled: 0
-  enableFrameTimingStats: 1
-  enableOpenGLProfilerGPURecorders: 1
+  enableFrameTimingStats: 0
+  enableOpenGLProfilerGPURecorders: 0
   useHDRDisplay: 0
   D3DHDRBitDepth: 0
   m_ColorGamuts: 00000000

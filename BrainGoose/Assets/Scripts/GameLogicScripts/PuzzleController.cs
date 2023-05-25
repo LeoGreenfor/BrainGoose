@@ -173,6 +173,6 @@ public class PuzzleController : MonoBehaviour
 
         yield return new WaitForSeconds(2.0f);
 
-        SceneManager.LoadScene(UnityEngine.Random.Range(2, 4));
+        SceneManager.LoadScene(UnityEngine.Random.Range(2, 5));
     }
 }
