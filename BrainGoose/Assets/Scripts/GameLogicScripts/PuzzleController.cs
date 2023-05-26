@@ -26,7 +26,8 @@ public class PuzzleController : MonoBehaviour
 
     public void Initiate()
     {
-        Button[] buttons = GetComponentsInChildren<Button>().ToArray();
+        Button[] buttons = GetComponentsInChildren<Button>()
+            .Where( b => b.GetComponentInChildren<TMP_Text>() != null).ToArray();
         buttonsGrid = new Button[4][];
         for (int i = 0; i < buttonsGrid.Length; i++)
         {
@@ -172,6 +173,11 @@ public class PuzzleController : MonoBehaviour
 
         yield return new WaitForSeconds(2.0f);
 
-        SceneManager.LoadScene(UnityEngine.Random.Range(2, 4));
+        int index = UnityEngine.Random.Range(2, 5);
+        while (index == SceneManager.GetActiveScene().buildIndex)
+        {
+            index = UnityEngine.Random.Range(2, 5);
+        }
+        SceneManager.LoadScene(index);
     }
 }

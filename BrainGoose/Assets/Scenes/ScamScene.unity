@@ -589,8 +589,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 955763560}
-        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
+      - m_Target: {fileID: 955763564}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: GoByUrl
         m_Mode: 5
         m_Arguments:
@@ -727,7 +727,7 @@ GameObject:
   - component: {fileID: 955763563}
   - component: {fileID: 955763562}
   - component: {fileID: 955763561}
-  - component: {fileID: 955763560}
+  - component: {fileID: 955763564}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -760,19 +760,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &955763560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 955763558}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e9a537326fa8b64f896ddecd99140cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  score: {fileID: 0}
 --- !u!114 &955763561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -834,6 +821,19 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &955763564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955763558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef97cfc1cd0c24f4aa010b27e9d00d81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  qObject: {fileID: 0}
 --- !u!1 &1318595317
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,7 +1056,6 @@ GameObject:
   - component: {fileID: 1654569935}
   - component: {fileID: 1654569934}
   - component: {fileID: 1654569933}
-  - component: {fileID: 1654569936}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1131,18 +1130,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1654569936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1654569932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e7ebe24abc13114c8b6164ac55492c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1705755069
 GameObject:
   m_ObjectHideFlags: 0
@@ -1303,8 +1290,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 955763560}
-        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
+      - m_Target: {fileID: 955763564}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: GoByUrl
         m_Mode: 5
         m_Arguments:

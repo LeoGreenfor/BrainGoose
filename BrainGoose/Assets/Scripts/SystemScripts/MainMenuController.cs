@@ -33,16 +33,6 @@ public class MainMenuController : MonoBehaviour
         Application.Quit();
     }
 
-    public void GoByUrl(string url)
-    {
-        Application.OpenURL(url);
-    }
-
-    public void NextScene()
-    {
-        SceneManager.LoadScene(Random.Range(2, 4));
-    }
-
     public void Loadscene(int index)
     {
         SceneManager.LoadScene(index);
