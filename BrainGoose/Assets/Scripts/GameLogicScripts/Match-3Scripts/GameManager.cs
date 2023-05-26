@@ -300,33 +300,24 @@ public class GameManager : MonoBehaviour, IMatch3GameHandler
     {
         ScoreText.text = currentScore.ToString();
         EarnedScoreText.UpdateText("+" + earnedScore);
+        SaveManager.AddScore(earnedScore);
+        SaveManager.SaveData();
 
         if (currentScore >= 500)
         {
             StartCoroutine(Nextscene(currentScore));
         }
-
-        //SaveManager.AddScore(earnedScore);
-        //SaveManager.SaveData();
         
     }
 
     private IEnumerator Nextscene(int score)
     {
-        SaveManager.AddScore(score);
-        SaveManager.SaveData();
         finishObject.GetComponentInChildren<TMP_Text>().text += SaveManager.GetScore().ToString();
         finishObject.SetActive(true);
 
         yield return new WaitForSeconds(2.0f);
 
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        int index = Random.Range(2, 5);
-        while (index == SceneManager.GetActiveScene().buildIndex)
-        {
-            index = Random.Range(2, 5);
-        }
-        SceneManager.LoadScene(index);
+        ResetGame();
     }
 
     /// <summary>
