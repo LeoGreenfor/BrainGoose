@@ -26,4 +26,15 @@ public class PlayerController : MonoBehaviour
     {
         Application.OpenURL(url);
     }
+
+    public void NextScene()
+    {
+        int index = Random.Range(2, 5);
+        while (index == SceneManager.GetActiveScene().buildIndex)
+        {
+            index = Random.Range(2, 5);
+        }
+        SceneManager.LoadScene(index);
+        //SceneManager.LoadScene(Random.Range(2, 5));
+    }
 }

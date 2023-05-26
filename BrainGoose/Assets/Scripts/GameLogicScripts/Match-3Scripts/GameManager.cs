@@ -319,9 +319,14 @@ public class GameManager : MonoBehaviour, IMatch3GameHandler
         finishObject.SetActive(true);
 
         yield return new WaitForSeconds(2.0f);
-        
+
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        SceneManager.LoadScene(Random.Range(2, 5));
+        int index = Random.Range(2, 5);
+        while (index == SceneManager.GetActiveScene().buildIndex)
+        {
+            index = Random.Range(2, 5);
+        }
+        SceneManager.LoadScene(index);
     }
 
     /// <summary>

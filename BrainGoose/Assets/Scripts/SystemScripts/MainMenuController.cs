@@ -33,11 +33,6 @@ public class MainMenuController : MonoBehaviour
         Application.Quit();
     }
 
-    public void NextScene()
-    {
-        SceneManager.LoadScene(Random.Range(2, 5));
-    }
-
     public void Loadscene(int index)
     {
         SceneManager.LoadScene(index);

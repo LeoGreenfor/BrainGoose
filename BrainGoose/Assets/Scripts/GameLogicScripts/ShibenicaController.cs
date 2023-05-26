@@ -41,7 +41,8 @@ public class ShibenicaController : MonoBehaviour
         string[] substrings = ListOfWordsAndTopic[currentTopic].Split("_");
         currentWord = substrings[1];
         rightWord = currentWord;
-        qText.text = substrings[2];
+
+        qText.text = substrings[2] + " длина слова - " + rightWord.Length + " букв.";
         
         for (int i = 0; i < currentWord.Length; i++)
         {
@@ -151,7 +152,12 @@ public class ShibenicaController : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
 
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        SceneManager.LoadScene(Random.Range(2, 5));
+        int index = Random.Range(2, 5);
+        while (index == SceneManager.GetActiveScene().buildIndex)
+        {
+            index = Random.Range(2, 5);
+        }
+        SceneManager.LoadScene(index);
     }
 
 }
