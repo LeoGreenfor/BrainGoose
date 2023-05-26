@@ -17,7 +17,7 @@ namespace GameSaver
         public static void AddScore(int score)
         {
             GlobalScore += score;
-            //CheckScore();
+            CheckScore();
         }
         public static void SetScore(int score)
         {
@@ -31,7 +31,7 @@ namespace GameSaver
         {
             if (GlobalScore >= 4500)
             {
-                SceneManager.LoadScene(5);
+                SceneManager.LoadScene(2);
             }
         }
 

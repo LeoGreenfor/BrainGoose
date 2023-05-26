@@ -43,7 +43,25 @@ public class ShibenicaController : MonoBehaviour
         rightWord = currentWord;
 
         qText.text = substrings[2] + " длина слова - " + rightWord.Length + " букв.";
-        
+
+        for (int i = 0; i < currentWord.Length; i++)
+        {
+            emptyWord += "_";
+        }
+
+        TopicText.text = substrings[0];
+        WordText.text = emptyWord;
+    }
+
+    private void RestartGame()
+    {
+        currentTopic = Random.Range(0, 23);
+        string[] substrings = ListOfWordsAndTopic[currentTopic].Split("_");
+        currentWord = substrings[1];
+        rightWord = currentWord;
+
+        qText.text = substrings[2] + " длина слова - " + rightWord.Length + " букв.";
+
         for (int i = 0; i < currentWord.Length; i++)
         {
             emptyWord += "_";
@@ -83,7 +101,7 @@ public class ShibenicaController : MonoBehaviour
             {
                 numberOfMistakes++;
                 shibenicaImage.GetComponent<ImageInfo>().ChangeImage(numberOfMistakes);
-                maxPoints -= 100;
+                maxPoints -= 125;
             }
             
             IsLetterOnClick = false;
@@ -93,12 +111,12 @@ public class ShibenicaController : MonoBehaviour
         {
             numberOfMistakes = 0;
             endGameScreen.color = new Color(205.0f, 0.0f, 0.0f, 0.5f);
-            StartCoroutine(Nextscene());
+            StartCoroutine(Restart());
         }
         if (isWinningGame)
         {
             endGameScreen.color = new Color(0.0f, 200.0f, 0.0f, 0.5f);
-            StartCoroutine(Nextscene());
+            StartCoroutine(Restart());
         }
     }
 
@@ -142,6 +160,19 @@ public class ShibenicaController : MonoBehaviour
         currentLetter = letter;
     }
 
+    private IEnumerator Restart()
+    {
+        SaveManager.AddScore(maxPoints);
+        SaveManager.SaveData();
+        endGameScreen.GetComponentInChildren<TMP_Text>().text += SaveManager.GetScore().ToString();
+        endGameScreen.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(2.0f);
+
+        endGameScreen.gameObject.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     private IEnumerator Nextscene()
     {
         SaveManager.AddScore(maxPoints);
@@ -151,7 +182,6 @@ public class ShibenicaController : MonoBehaviour
 
         yield return new WaitForSeconds(2.0f);
 
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         int index = Random.Range(2, 5);
         while (index == SceneManager.GetActiveScene().buildIndex)
         {
