@@ -17,7 +17,7 @@ namespace GameSaver
         public static void AddScore(int score)
         {
             GlobalScore += score;
-            //CheckScore();
+            CheckScore();
         }
         public static void SetScore(int score)
         {

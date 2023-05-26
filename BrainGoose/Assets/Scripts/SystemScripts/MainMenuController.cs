@@ -21,11 +21,11 @@ public class MainMenuController : MonoBehaviour
         {
             score.text = "Очки: " + SaveManager.GetScore().ToString();
         }
-        //SaveManager.CheckScore();
     }
 
     public void BeginGame()
     {
+        SaveManager.CheckScore();
         SceneManager.LoadScene(1);
     }
     public void Exit()
